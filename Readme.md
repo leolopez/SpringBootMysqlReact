@@ -1,6 +1,6 @@
 
 
-## Building a Full Stack Login app component with Spring Boot, Spring Security, JWT, React and Ant Design
+## Building a Full Stack Login app component with Spring Boot, Hibernate, MySQL, Spring Security, JWT, React and Ant Design
 
 ## Steps to Setup the Spring Boot Back end app (login-app-server)
 
