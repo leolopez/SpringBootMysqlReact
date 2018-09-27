@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Login from './user/login/Login';
+import LoginHome from './LoginHome';
 import  Signup  from './user/signup/Signup';
 import  Profile  from './user/profile/Profile';
 import AppHeader from './common/AppHeader';
@@ -44,6 +45,7 @@ class App extends Component {
         isAuthenticated: true,
         isLoading: false
       });
+      this.props.history.push(`/accessHome/${response.username}`);
     }).catch(error => {
       this.setState({
         isLoading: false
@@ -77,7 +79,7 @@ class App extends Component {
       description: "You're successfully logged in.",
     });
     this.loadCurrentUser();
-    this.props.history.push("/");
+    
   }
   render() {
     return (
@@ -88,15 +90,16 @@ class App extends Component {
 
          <Content className="app-content">
             <div className="container">
-              <Switch>      
-                
+              <Switch>                  
+              <Route path="/accessHome/:username" 
+                  render={(props) => <LoginHome isAuthenticated={this.state.isAuthenticated} username={this.state.currentUser} {...props}  />}>
+                </Route>
                 <Route path="/login" 
                   render={(props) => <Login onLogin={this.handleLogin} {...props} />}></Route>
                 <Route path="/signup" component={Signup}></Route>
                 <Route path="/users/:username" 
                   render={(props) => <Profile isAuthenticated={this.state.isAuthenticated} currentUser={this.state.currentUser} {...props}  />}>
-                </Route>
-                
+                </Route>                
               </Switch>
             </div>
           

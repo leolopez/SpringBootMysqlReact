@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import { getUserProfile } from '../../util/APIUtils';
+import { getUserProfile } from './util/APIUtils';
+import LoadingIndicator  from './common/LoadingIndicator';
+import NotFound from './common/NotFound';
+import ServerError from './common/ServerError';
+import CheckAuthentication from './common/CheckAuthentication';
 
-import { formatDate } from '../../util/Helpers';
-import LoadingIndicator  from '../../common/LoadingIndicator';
-import './Profile.css';
-import NotFound from '../../common/NotFound';
-import CheckAuthentication from '../../common/CheckAuthentication';
-import ServerError from '../../common/ServerError';
-class Profile extends Component {
+class LoginHome extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -16,32 +14,33 @@ class Profile extends Component {
         }
     }
 
-    loadUserProfile(username) {
+     loadUserProfile=(username) => {        
+        const _this=this;
         if(this.props.username !== null){ 
-        this.setState({
+        _this.setState({
             isLoading: true
         });
 
         getUserProfile(username)
         .then(response => {
-            this.setState({
+            _this.setState({
                 user: response,
                 isLoading: false
             });
         }).catch(error => {
             if(error.status === 404) {
-                this.setState({
+                _this.setState({
                     notFound: true,
                     isLoading: false
                 });
             } else {
-                this.setState({
+                _this.setState({
                     serverError: true,
                     isLoading: false
                 });        
             }
-        });
-        }        
+        });    
+    }    
     }
       
     componentDidMount() {
@@ -72,27 +71,17 @@ class Profile extends Component {
         }
 
         return (
-            <div className="profile">
+            <div className="App-content">
                 { 
-                     this.state.user ? (
-                        <div className="user-profile">
-                            <div className="user-details">
-                                
-                                <div className="user-summary">
-                                    <div className="full-name">{this.state.user.name}</div>
-                                    <div className="username">@{this.state.user.username}</div>
-                                    <div className="user-joined">
-                                        Joined {formatDate(this.state.user.joinedAt)}
-                                    </div>
-                                </div>
-                            </div>
-                             
+                    this.state.user ? (
+                        <div>
+                            login access home                             
                         </div>  
-                    ):  null           
+                    ): null               
                 }
             </div>
         );
     }
 }
 
-export default Profile;
+export default LoginHome;

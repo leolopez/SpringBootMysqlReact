@@ -25,7 +25,7 @@ class AppHeader extends Component {
         if(this.props.currentUser) {
           menuItems = [
             <Menu.Item key="/">
-              <Link to="/">
+              <Link to={`/accessHome/${this.props.currentUser.username}`}>
                 <Icon type="home" className="nav-icon" />
               </Link>
             </Menu.Item>,
