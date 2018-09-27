@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
-import com.example.login.exception.AppException;
 import com.example.login.model.Role;
 import com.example.login.model.RoleName;
 
